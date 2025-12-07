@@ -1,0 +1,18 @@
+{
+  "name": "vanscans-garage",
+  "version": "1.0.0",
+  "description": "Vanscans Garage Preview",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "python3 -m http.server 8080"
+  },
+  "keywords": ["3d", "webgl", "threejs", "photogrammetry", "garage"],
+  "author": "Vanscans",
+  "license": "None",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
