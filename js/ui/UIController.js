@@ -14,7 +14,8 @@ export class UIController {
             modelInfo: document.getElementById('model-info'),
             vanName: document.getElementById('van-name'),
             vanDetails: document.getElementById('van-details'),
-            fpsCounter: document.getElementById('fps-counter')
+            fpsCounter: document.getElementById('fps-counter'),
+            wipBanner: document.querySelector('.wip-banner')
         };
 
         this.lastFrameTime = performance.now();
@@ -213,6 +214,9 @@ export class UIController {
      */
     showSmallLoader() {
         this.elements.smallLoader.style.display = 'block';
+        if (this.elements.wipBanner) {
+            this.elements.wipBanner.style.display = 'none';
+        }
     }
 
     /**
@@ -220,6 +224,9 @@ export class UIController {
      */
     hideSmallLoader() {
         this.elements.smallLoader.style.display = 'none';
+        if (this.elements.wipBanner) {
+            this.elements.wipBanner.style.display = 'block';
+        }
     }
 
     /**
