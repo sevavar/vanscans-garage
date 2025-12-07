@@ -226,8 +226,9 @@ export class UIController {
      * Update loading progress
      */
     updateProgress(percent) {
-        // Update text instead of progress bar
-        this.elements.loadingText.textContent = `Loading garage...${Math.round(percent)}%`;
+        // Clamp percentage to 0-100 range
+        const clampedPercent = Math.min(100, Math.max(0, Math.round(percent)));
+        this.elements.loadingText.textContent = `Loading garage...${clampedPercent}%`;
     }
 
     /**
