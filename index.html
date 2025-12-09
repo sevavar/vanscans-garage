@@ -38,9 +38,6 @@
             <!-- Right Arrow - Next Van -->
             <div class="arrow-right" id="next-van">&gt;</div>
 
-            <!-- Top Right - FPS Counter -->
-            <div id="fps-counter"></div>
-
             <!-- Top Left - Van Selector Panel -->
             <div class="van-selector-panel">
                 <!--<h2>Select Vehicle</h2>-->
@@ -49,7 +46,20 @@
                 </div>
             </div>
 
-            <!-- Bottom Left - Controls Info -->
+            <!-- Bottom Left - Model Info Panel (with FPS) -->
+            <div id="model-info" class="info-panel">
+                <p id="fps-counter">FPS: 0</p>
+                <p id="van-name">No vehicle loaded</p>
+                <p id="van-details"></p>
+            </div>
+
+            <!-- Bottom Right - Retry Icon -->
+            <div id="retry-icon">
+                <img src="assets/retry.svg" alt="Retry" onerror="this.style.display='none'">
+            </div>
+
+            <!-- Bottom Left - Controls Info (hidden) -->
+            <!--
             <div class="controls-info">
                 <h3>Controls</h3>
                 <ul>
@@ -57,12 +67,7 @@
                     <li><strong>Scroll:</strong> Zoom in/out</li>
                 </ul>
             </div>
-
-            <!-- Bottom Right - Model Info Panel -->
-            <div id="model-info" class="info-panel">
-                <p id="van-name">No vehicle loaded</p>
-                <p id="van-details"></p>
-            </div>
+            -->
         </div>
     </div>
 

@@ -19,7 +19,9 @@ export class UIController {
         };
 
         this.lastFrameTime = performance.now();
+        this.lastFPSUpdateTime = performance.now();
         this.fps = 0;
+        this.fpsUpdateInterval = 500; // Update FPS twice per second (500ms)
         
         this.init();
     }
@@ -254,8 +256,12 @@ export class UIController {
         this.fps = Math.round(1000 / delta);
         this.lastFrameTime = now;
         
-        if (this.elements.fpsCounter) {
-            this.elements.fpsCounter.textContent = `FPS: ${this.fps}`;
+        // Only update display twice per second
+        if (now - this.lastFPSUpdateTime >= this.fpsUpdateInterval) {
+            if (this.elements.fpsCounter) {
+                this.elements.fpsCounter.textContent = `FPS: ${this.fps}`;
+            }
+            this.lastFPSUpdateTime = now;
         }
     }
 

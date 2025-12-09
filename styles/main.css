@@ -134,7 +134,7 @@ body {
 }
 
 .logo {
-    height: 80px;
+    height: 70px;
     width: auto;
 }
 
@@ -163,13 +163,17 @@ body {
     color: #ff0000;
 }
 
-/* FPS Counter - Top Right */
-#fps-counter {
+/* Retry Icon - Bottom Right */
+#retry-icon {
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
-    font-size: 16px;
-    color: #fff;
+}
+
+#retry-icon img {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
 }
 
 /* Van Selector Panel - Top Left */
@@ -268,12 +272,13 @@ body {
     color: #fff;
 }
 
-/* Model Info Panel - Bottom Right */
+/* Model Info Panel - Bottom Left */
 .info-panel {
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    left: 20px;
     max-width: 300px;
+    line-height: 1.4;
 }
 
 .info-panel h3 {
@@ -282,15 +287,21 @@ body {
     color: #fff;
 }
 
+#fps-counter {
+    font-size: 16px;
+    margin: 0;
+    color: #fff;
+}
+
 #van-name {
     font-size: 16px;
-    margin-bottom: 5px;
+    margin: 0;
     color: #fff;
 }
 
 #van-details {
     font-size: 16px;
-    line-height: 1.5;
+    margin: 0;
     color: #fff;
 }
 
