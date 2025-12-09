@@ -13,7 +13,7 @@ export const CONFIG = {
 
     // Camera settings
     camera: {
-        fov: 60,
+        fov: 70,
         near: 0.1,
         far: 1000,
         initialPosition: { x: 0, y: 3, z: -8 },

@@ -141,13 +141,14 @@ body {
 /* Navigation Arrows */
 .arrow-left,
 .arrow-right {
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
     font-size: 32px;
     color: #fff;
     cursor: pointer;
     user-select: none;
+    z-index: 10;
 }
 
 .arrow-left {
@@ -274,7 +275,7 @@ body {
 
 /* Model Info Panel - Bottom Left */
 .info-panel {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 20px;
     max-width: 300px;
@@ -307,6 +308,19 @@ body {
 
 #van-details strong {
     color: #fff;
+}
+
+/* Retry Icon - Bottom Right */
+#retry-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#retry-icon img {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
 }
 
 /* Animations */

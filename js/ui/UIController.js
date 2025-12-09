@@ -21,7 +21,7 @@ export class UIController {
         this.lastFrameTime = performance.now();
         this.lastFPSUpdateTime = performance.now();
         this.fps = 0;
-        this.fpsUpdateInterval = 500; // Update FPS twice per second (500ms)
+        this.fpsUpdateInterval = 100; // Update FPS twice per second (500ms)
         
         this.init();
     }
@@ -106,9 +106,9 @@ export class UIController {
 
         this.elements.vanName.textContent = vanData.config.name;
         this.elements.vanDetails.innerHTML = `
-            <strong>Polygons:</strong> ${vanData.info.polygonCount.toLocaleString()}<br>
-            <strong>Vertices:</strong> ${vanData.info.vertexCount.toLocaleString()}<br>
-            <strong>Size:</strong> ${vanData.info.boundingBox.size.x} × 
+            Polygons: ${vanData.info.polygonCount.toLocaleString()}<br>
+            Vertices: ${vanData.info.vertexCount.toLocaleString()}<br>
+            Size: ${vanData.info.boundingBox.size.x} × 
                                     ${vanData.info.boundingBox.size.y} × 
                                     ${vanData.info.boundingBox.size.z} m
         `;
