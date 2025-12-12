@@ -17,7 +17,7 @@ export const CONFIG = {
         near: 0.1,
         far: 1000,
         initialPosition: { x: 0, y: 3, z: -8 },
-        lookAt: { x: 0, y: 1, z: 0 }
+        lookAt: { x: 0, y: 1.1, z: 0 }
     },
 
     // Lighting settings
@@ -37,7 +37,7 @@ export const CONFIG = {
                 color: 0xffffff, 
                 intensity: 0.3, 
                 position: { x: -10, y: 10, z: -10 },
-                castShadow: false
+                castShadow: true
             }
         ],
         hemisphere: {
@@ -72,7 +72,7 @@ export const CONFIG = {
         vans: {
             basePath: 'models/vans/',
             defaultScale: 1.0,
-            defaultPosition: { x: 0, y: 0, z: 0 },
+            defaultPosition: { x: 0, y: 0.42, z: 0 },
             
             // Van naming pattern: van-001.glb, van-002.glb, etc.
             filenamePattern: 'van-',
@@ -86,7 +86,7 @@ export const CONFIG = {
                     filename: 'van-001.glb',
                     thumbnail: 'thumbnails/van-001.jpg',
                     scale: 1.0,
-                    position: { x: 0, y: 0, z: 0 },
+                    position: { x: 0, y: 0.42, z: 0 },
                     rotation: { x: 0, y: Math.PI, z: 0 }
                 }
                 // More vans will be added here or loaded dynamically

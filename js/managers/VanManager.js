@@ -16,6 +16,8 @@ export class VanManager {
         this.currentVanId = null;
         this.availableVans = []; // Dynamically detected vans
         this.vansDetected = false;
+        this.wheelModel = null; // Cached wheel model
+        this.loadWheelModel(); // Preload wheel model
     }
 
     /**
@@ -80,6 +82,67 @@ export class VanManager {
         console.log(`Detected ${detectedVans.length} van models:`, detectedVans.map(v => v.id));
         
         return this.availableVans;
+    }
+
+    /**
+     * Load wheel model for attaching to vans
+     */
+    async loadWheelModel() {
+        try {
+            const wheelPath = 'models/vans/wheel/wheel.glb';
+            const wheelData = await this.modelLoader.loadModel(wheelPath, {
+                scale: 1.0,
+                position: { x: 0, y: 0, z: 0 },
+                rotation: { x: 0, y: 0, z: 0 }
+            });
+            this.wheelModel = wheelData.model;
+            console.log('Wheel model loaded successfully');
+        } catch (error) {
+            console.warn('Wheel model not found or failed to load:', error);
+            this.wheelModel = null;
+        }
+    }
+
+    /**
+     * Attach wheels to van if null objects FL, FR, RL, RR exist
+     */
+    attachWheelsToVan(vanModel) {
+        if (!this.wheelModel) {
+            console.log('No wheel model available, skipping wheel attachment');
+            return;
+        }
+
+        const wheelPositions = ['FL', 'FR', 'RL', 'RR'];
+        const foundNulls = [];
+        
+        // Search for null objects in the van model
+        vanModel.traverse((child) => {
+            if (wheelPositions.includes(child.name)) {
+                foundNulls.push(child);
+            }
+        });
+
+        if (foundNulls.length === 0) {
+            console.log('No wheel null objects found in van model, displaying without wheels');
+            return;
+        }
+
+        console.log(`Found ${foundNulls.length} wheel mount points:`, foundNulls.map(n => n.name));
+
+        // Attach wheel clones to each null object position
+        foundNulls.forEach((nullObject) => {
+            const wheelClone = this.wheelModel.clone();
+            
+            // Copy position and rotation from null object
+            wheelClone.position.copy(nullObject.position);
+            wheelClone.rotation.copy(nullObject.rotation);
+            wheelClone.scale.copy(nullObject.scale);
+            
+            // Add wheel to the van model
+            vanModel.add(wheelClone);
+            
+            console.log(`Attached wheel to ${nullObject.name}`);
+        });
     }
 
     /**
@@ -152,6 +215,9 @@ export class VanManager {
                 rotation: { x: 0, y: Math.PI, z: 0 }
             });
 
+            // Attach wheels if null objects exist
+            this.attachWheelsToVan(vanData.model);
+
             // Store van data
             this.vans.set(vanId, {
                 model: vanData.model,
@@ -212,6 +278,9 @@ export class VanManager {
                 position: truckConfig.position || CONFIG.models.vans.defaultPosition,
                 rotation: truckConfig.rotation || { x: 0, y: Math.PI, z: 0 }
             });
+
+            // Attach wheels if null objects exist
+            this.attachWheelsToVan(truckData.model);
 
             // Store truck data
             this.vans.set(truckId, {
