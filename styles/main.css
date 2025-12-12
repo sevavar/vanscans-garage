@@ -29,7 +29,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 16px;
+    font-size: 12px;
     color: #fff;
     z-index: 999;
     animation: blink 2s step-end infinite;
@@ -71,8 +71,8 @@ body {
 }
 
 .loader {
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
     border: 5px solid rgba(255, 255, 255, 0.1);
     border-top-color: #fff;
     border-radius: 50%;
@@ -95,8 +95,8 @@ body {
 }
 
 #small-loader .loader {
-    width: 80px;
-    height: 80px;
+    width: 30px;
+    height: 30px;
     border: 6px solid rgba(255, 255, 255, 0.2);
     border-top-color: #fff;
     border-radius: 50%;
@@ -105,7 +105,7 @@ body {
 }
 
 #loading-text {
-    font-size: 16px;
+    font-size: 12px;
     color: #fff;
 }
 
@@ -186,7 +186,7 @@ body {
 }
 
 .van-selector-panel h2 {
-    font-size: 16px;
+    font-size: 12px;
     margin-bottom: 10px;
     color: #fff;
 }
@@ -201,7 +201,7 @@ body {
     cursor: pointer;
     padding: 0px 0;
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -217,7 +217,7 @@ body {
 
 .van-arrow {
     opacity: 0;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .van-item.active .van-arrow {
@@ -241,7 +241,7 @@ body {
 */
 
 .van-name {
-    font-size: 16px;
+    font-size: 12px;
     color: inherit;
 }
 
@@ -254,7 +254,7 @@ body {
 }
 
 .controls-info h3 {
-    font-size: 16px;
+    font-size: 12px;
     margin-bottom: 10px;
     color: #fff;
 }
@@ -264,8 +264,8 @@ body {
 }
 
 .controls-info li {
-    font-size: 16px;
-    margin-bottom: 5px;
+    font-size: 12px;
+    margin-bottom: 0px;
     color: #fff;
 }
 
@@ -280,41 +280,42 @@ body {
     left: 20px;
     max-width: 300px;
     line-height: 1.4;
+    white-space: nowrap;
 }
 
 .info-panel h3 {
-    font-size: 16px;
+    font-size: 12px;
     margin-bottom: 10px;
     color: #fff;
 }
 
 #fps-counter {
-    font-size: 16px;
+    font-size: 12px;
     margin: 0;
     color: #fff;
 }
 
 #van-name {
-    font-size: 16px;
+    font-size: 12px;
     margin: 0;
     color: #fff;
 }
 
 #van-details {
-    font-size: 16px;
+    font-size: 12px;
     margin: 0;
     color: #fff;
 }
 
-#van-details strong {
+#van-details {
     color: #fff;
 }
 
 /* Retry Icon - Bottom Right */
 #retry-icon {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 15px;
+    right: 15px;
 }
 
 #retry-icon img {

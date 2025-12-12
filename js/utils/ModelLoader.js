@@ -50,6 +50,8 @@ export class ModelLoader {
      * @returns {Promise} - Returns loaded model
      */
     async loadModel(path, options = {}) {
+        let fileSize = 0;
+        
         return new Promise((resolve, reject) => {
             this.gltfLoader.load(
                 path,
@@ -94,12 +96,14 @@ export class ModelLoader {
                     resolve({
                         model: model,
                         animations: gltf.animations,
-                        userData: gltf.userData
+                        userData: gltf.userData,
+                        fileSize: fileSize
                     });
                 },
                 (xhr) => {
                     // Progress callback
                     if (xhr.lengthComputable) {
+                        fileSize = xhr.total; // Capture file size
                         const percentComplete = (xhr.loaded / xhr.total) * 100;
                         if (this.onProgress) {
                             this.onProgress(percentComplete, path);

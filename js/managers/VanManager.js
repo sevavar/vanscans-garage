@@ -218,6 +218,10 @@ export class VanManager {
             // Attach wheels if null objects exist
             this.attachWheelsToVan(vanData.model);
 
+            // Get model info and add file size
+            const modelInfo = this.modelLoader.getModelInfo(vanData.model);
+            modelInfo.fileSize = vanData.fileSize;
+
             // Store van data
             this.vans.set(vanId, {
                 model: vanData.model,
@@ -228,7 +232,7 @@ export class VanManager {
                     thumbnail: `thumbnails/van-${String(vanNumber).padStart(3, '0')}.jpg`
                 },
                 animations: vanData.animations,
-                info: this.modelLoader.getModelInfo(vanData.model)
+                info: modelInfo
             });
 
             // Log van info
@@ -282,12 +286,16 @@ export class VanManager {
             // Attach wheels if null objects exist
             this.attachWheelsToVan(truckData.model);
 
+            // Get model info and add file size
+            const modelInfo = this.modelLoader.getModelInfo(truckData.model);
+            modelInfo.fileSize = truckData.fileSize;
+
             // Store truck data
             this.vans.set(truckId, {
                 model: truckData.model,
                 config: truckConfig,
                 animations: truckData.animations,
-                info: this.modelLoader.getModelInfo(truckData.model)
+                info: modelInfo
             });
 
             // Log truck info

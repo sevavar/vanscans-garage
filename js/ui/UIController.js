@@ -43,10 +43,13 @@ export class UIController {
             vanItem.className = 'van-item';
             vanItem.dataset.vanId = van.id;
             
+            // Extract just the number from van name (e.g., "Van 001" -> "001")
+            const vanNumber = van.name.replace(/Van\s*/i, '');
+            
             // Simple text list with arrow indicator for active van
             vanItem.innerHTML = `
                 <span class="van-arrow">&gt;</span>
-                <div class="van-name">${van.name}</div>
+                <div class="van-name">${vanNumber}</div>
             `;
             
             /* Thumbnail version for future use:
@@ -104,13 +107,14 @@ export class UIController {
             return;
         }
 
-        this.elements.vanName.textContent = vanData.config.name;
+        // Display file size in first line
+        const fileSizeMB = vanData.info.fileSize ? (vanData.info.fileSize / (1024 * 1024)).toFixed(2) : '0.00';
+        this.elements.vanName.textContent = `Size: ${fileSizeMB} MB`;
+        
         this.elements.vanDetails.innerHTML = `
-            Polygons: ${vanData.info.polygonCount.toLocaleString()}<br>
-            Vertices: ${vanData.info.vertexCount.toLocaleString()}<br>
-            Size: ${vanData.info.boundingBox.size.x} × 
-                                    ${vanData.info.boundingBox.size.y} × 
-                                    ${vanData.info.boundingBox.size.z} m
+            Poly: ${vanData.info.polygonCount.toLocaleString()}<br>
+            Vert: ${vanData.info.vertexCount.toLocaleString()}<br>
+            Dims: ${vanData.info.boundingBox.size.x} × ${vanData.info.boundingBox.size.y} × ${vanData.info.boundingBox.size.z} M
         `;
     }
 
