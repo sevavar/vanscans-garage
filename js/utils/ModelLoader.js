@@ -80,14 +80,20 @@ export class ModelLoader {
                         );
                     }
 
-                    // Enable shadows for all meshes
+                    // Enable shadows and smooth shading for all meshes
                     model.traverse((child) => {
                         if (child.isMesh) {
                             child.castShadow = true;
                             child.receiveShadow = true;
                             
+                            // Force smooth shading
+                            if (child.geometry) {
+                                child.geometry.computeVertexNormals();
+                            }
+                            
                             // Ensure proper material rendering
                             if (child.material) {
+                                child.material.flatShading = false;
                                 child.material.needsUpdate = true;
                             }
                         }

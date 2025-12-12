@@ -162,7 +162,7 @@ export const CONFIG = {
         maxDistance: 5,
         minPolarAngle: Math.PI / 2,  // Lock to horizontal (90 degrees)
         maxPolarAngle: Math.PI / 2,  // Lock to horizontal (90 degrees)
-        autoRotate: false,  // Enable auto-rotation
+        autoRotate: true,  // Enable auto-rotation
         autoRotateSpeed: -1  // Negative for counter-clockwise rotation
     },
 
