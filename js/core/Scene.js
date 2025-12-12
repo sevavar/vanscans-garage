@@ -39,7 +39,7 @@ export class SceneManager {
 
         // Add grid helper for development
         const gridHelper = new THREE.GridHelper(100, 100, 0x444444, 0x222222);
-        this.scene.add(gridHelper);
+        //this.scene.add(gridHelper);
     }
 
     getScene() {

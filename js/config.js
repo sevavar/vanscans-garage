@@ -23,28 +23,55 @@ export const CONFIG = {
     // Lighting settings
     lighting: {
         ambient: {
-            color: 0xffffff,
-            intensity: 1
+            color: 0x404040,
+            intensity: 0.2  // Very dim ambient for dark shadows
         },
-        directional: [
+        spotlights: [
+            // Main overhead spotlight
             { 
                 color: 0xffffff, 
-                intensity: 0.8, 
-                position: { x: 10, y: 15, z: 10 },
+                intensity: 3, 
+                position: { x: 5, y: 6, z: 0 },
+                target: { x: 0, y: 0, z: 0 },
+                angle: Math.PI / 4,
+                penumbra: 1,
+                distance: 15,
                 castShadow: true
             },
+            // Secondary overhead light
             { 
-                color: 0xffffff, 
-                intensity: 0.3, 
-                position: { x: -10, y: 10, z: -10 },
+            color: 0xffffff, 
+                intensity: 3, 
+                position: { x: -5, y: 6, z: 0 },
+                target: { x: 0, y: 0, z: 0 },
+                angle: Math.PI / 4,
+                penumbra: 1,
+                distance: 15,
+                castShadow: true
+            },
+            // 3rd overhead light
+            { 
+            color: 0xffffff, 
+                intensity: 3, 
+                position: { x: 0, y: 6, z: -4 },
+                target: { x: 0, y: 0, z: 0 },
+                angle: Math.PI / 4,
+                penumbra: 1,
+                distance: 15,
+                castShadow: true
+            },
+            // 4th overhead light
+            { 
+            color: 0xffffff, 
+                intensity: 3, 
+                position: { x: 0, y: 6, z: 4 },
+                target: { x: 0, y: 0, z: 0 },
+                angle: Math.PI / 4,
+                penumbra: 1,
+                distance: 15,
                 castShadow: true
             }
-        ],
-        hemisphere: {
-            skyColor: 0xffffff,
-            groundColor: 0x444444,
-            intensity: 0.3
-        }
+        ]
     },
 
     // Renderer settings
@@ -117,7 +144,7 @@ export const CONFIG = {
                 van: 20    // MB
             },
             textureSize: {
-                max: 2048,  // 2K textures
+                max: 4096,  // 4K textures
                 recommended: 1024
             }
         }
@@ -135,8 +162,8 @@ export const CONFIG = {
         maxDistance: 5,
         minPolarAngle: Math.PI / 2,  // Lock to horizontal (90 degrees)
         maxPolarAngle: Math.PI / 2,  // Lock to horizontal (90 degrees)
-        autoRotate: true,  // Enable auto-rotation
-        autoRotateSpeed: -0.5  // Negative for counter-clockwise rotation
+        autoRotate: false,  // Enable auto-rotation
+        autoRotateSpeed: -1  // Negative for counter-clockwise rotation
     },
 
     // Performance settings

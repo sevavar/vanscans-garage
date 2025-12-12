@@ -138,11 +138,45 @@ export class VanManager {
             wheelClone.rotation.copy(nullObject.rotation);
             wheelClone.scale.copy(nullObject.scale);
             
+            // Make wheels not receive shadows from shadow box
+            wheelClone.traverse((child) => {
+                if (child.isMesh) {
+                    child.receiveShadow = false;
+                }
+            });
+            
             // Add wheel to the van model
             vanModel.add(wheelClone);
             
             console.log(`Attached wheel to ${nullObject.name}`);
         });
+    }
+
+    /**
+     * Create invisible shadow-casting box to simulate van roof
+     */
+    createShadowBox(vanModel, boundingBox) {
+        const size = boundingBox.getSize(new THREE.Vector3());
+        const center = boundingBox.getCenter(new THREE.Vector3());
+        
+        // Create thin box geometry scaled down to avoid wheels
+        const geometry = new THREE.BoxGeometry(size.x * 0.8, 0.1, size.z * 0.8);
+        
+        // Invisible material that still casts shadows
+        const material = new THREE.ShadowMaterial({ opacity: 0 });
+        
+        const shadowBox = new THREE.Mesh(geometry, material);
+        shadowBox.castShadow = true;
+        shadowBox.receiveShadow = false;
+        
+        // Position box 20cm above ground (not at van center)
+        shadowBox.position.set(center.x, 0.05, center.z);
+        
+        // Add to van model
+        vanModel.add(shadowBox);
+        
+        console.log('Created shadow box for van roof');
+        return shadowBox;
     }
 
     /**
@@ -222,6 +256,10 @@ export class VanManager {
             const modelInfo = this.modelLoader.getModelInfo(vanData.model);
             modelInfo.fileSize = vanData.fileSize;
 
+            // Create invisible shadow box to simulate roof
+            const boundingBox = new THREE.Box3().setFromObject(vanData.model);
+            this.createShadowBox(vanData.model, boundingBox);
+
             // Store van data
             this.vans.set(vanId, {
                 model: vanData.model,
@@ -289,6 +327,10 @@ export class VanManager {
             // Get model info and add file size
             const modelInfo = this.modelLoader.getModelInfo(truckData.model);
             modelInfo.fileSize = truckData.fileSize;
+
+            // Create invisible shadow box to simulate roof
+            const boundingBox = new THREE.Box3().setFromObject(truckData.model);
+            this.createShadowBox(truckData.model, boundingBox);
 
             // Store truck data
             this.vans.set(truckId, {

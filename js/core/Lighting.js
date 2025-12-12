@@ -9,7 +9,7 @@ export class LightingManager {
     }
 
     setupLights() {
-        // Add ambient light
+        // Add low-intensity ambient light for garage atmosphere
         const ambientLight = new THREE.AmbientLight(
             CONFIG.lighting.ambient.color,
             CONFIG.lighting.ambient.intensity
@@ -17,42 +17,52 @@ export class LightingManager {
         this.scene.add(ambientLight);
         this.lights.push(ambientLight);
 
-        // Add hemisphere light
-        const hemiLight = new THREE.HemisphereLight(
-            CONFIG.lighting.hemisphere.skyColor,
-            CONFIG.lighting.hemisphere.groundColor,
-            CONFIG.lighting.hemisphere.intensity
-        );
-        this.scene.add(hemiLight);
-        this.lights.push(hemiLight);
-
-        // Add directional lights
-        CONFIG.lighting.directional.forEach((lightConfig, index) => {
-            const dirLight = new THREE.DirectionalLight(
+        // Add spotlights (garage ceiling lights)
+        CONFIG.lighting.spotlights.forEach((lightConfig, index) => {
+            const spotlight = new THREE.SpotLight(
                 lightConfig.color,
-                lightConfig.intensity
+                lightConfig.intensity,
+                lightConfig.distance,
+                lightConfig.angle,
+                lightConfig.penumbra,
+                1  // decay
             );
             
-            dirLight.position.set(
+            spotlight.position.set(
                 lightConfig.position.x,
                 lightConfig.position.y,
                 lightConfig.position.z
             );
 
+            // Set target position
+            spotlight.target.position.set(
+                lightConfig.target.x,
+                lightConfig.target.y,
+                lightConfig.target.z
+            );
+            this.scene.add(spotlight.target);
+
             if (lightConfig.castShadow) {
-                dirLight.castShadow = true;
-                dirLight.shadow.mapSize.width = 2048;
-                dirLight.shadow.mapSize.height = 2048;
-                dirLight.shadow.camera.near = 0.5;
-                dirLight.shadow.camera.far = 50;
-                dirLight.shadow.camera.left = -20;
-                dirLight.shadow.camera.right = 20;
-                dirLight.shadow.camera.top = 20;
-                dirLight.shadow.camera.bottom = -20;
+                spotlight.castShadow = true;
+                spotlight.shadow.mapSize.width = 2048;
+                spotlight.shadow.mapSize.height = 2048;
+                spotlight.shadow.camera.near = 0.5;
+                spotlight.shadow.camera.far = 20;
+                spotlight.shadow.bias = -0.001;  // Increased to reduce shadow acne
+                spotlight.shadow.normalBias = 0.05;  // Helps reduce artifacts on curved surfaces
+                // Increase shadow darkness
+                spotlight.shadow.darkness = 0.9;
             }
 
-            this.scene.add(dirLight);
-            this.lights.push(dirLight);
+            this.scene.add(spotlight);
+            this.lights.push(spotlight);
+
+            // Add pink helper sphere to visualize light position
+            const helperGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+            const helperMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+            const helperSphere = new THREE.Mesh(helperGeometry, helperMaterial);
+            helperSphere.position.copy(spotlight.position);
+            //this.scene.add(helperSphere);
         });
     }
 
