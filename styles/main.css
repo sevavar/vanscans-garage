@@ -293,6 +293,7 @@ body {
     font-size: 12px;
     margin: 0;
     color: #fff;
+    white-space: pre;
 }
 
 #van-name {

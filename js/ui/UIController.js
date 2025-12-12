@@ -263,7 +263,7 @@ export class UIController {
         // Only update display twice per second
         if (now - this.lastFPSUpdateTime >= this.fpsUpdateInterval) {
             if (this.elements.fpsCounter) {
-                this.elements.fpsCounter.textContent = `FPS: ${this.fps}`;
+                this.elements.fpsCounter.textContent = `FPS:  ${this.fps}`;
             }
             this.lastFPSUpdateTime = now;
         }
